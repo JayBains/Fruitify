@@ -88,7 +88,7 @@ def findObjects(outputs, img):
             command = f"SELECT * FROM food WHERE id = '{currentId}'"
             print(cursor.execute(command).fetchall())
             currentInfo = cursor.execute(command).fetchall()
-            name = cv2.putText(uiImg, currentInfo[0][1], (315, 75), font, 0.5, color, 2, cv2.LINE_AA)
+            name = cv2.putText(uiImg, currentInfo[0][1], (315, 75), font, 0.5, color, 1, cv2.LINE_AA)
             calories = cv2.putText(uiImg, currentInfo[0][14], (390, 128), font, 1, color, 3, cv2.LINE_AA)
             totalFat = cv2.putText(uiImg, currentInfo[0][2], (357, 175), font, fontScale, color, thickness, cv2.LINE_AA)
             saturatedFat = cv2.putText(uiImg, currentInfo[0][15], (357, 195), font, fontScale, color, thickness, cv2.LINE_AA)
