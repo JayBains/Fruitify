@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import sqlite3
+import easygui
 
 connection = sqlite3.connect("nutrition.db")
 cursor = connection.cursor()
@@ -57,9 +58,6 @@ def findObjects(outputs, img):
         cv2.putText(img, f'{fruitNames[classIds[i]].upper()} {int(confidence_values[i]*100)}%',
                             (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 255), 2)
 
-        cv2.putText(img, f'{currentInfo}',
-                        (x + 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 255), 2)
-
         # Displays information stored in 'nutrition' database
         # Data will only be printed on a change in class id, so variable current id is used as comparison
         if classIds[i] != currentId:
@@ -67,9 +65,7 @@ def findObjects(outputs, img):
             command = f"SELECT * FROM food WHERE id = '{currentId}'"
             print(cursor.execute(command).fetchall())
             currentInfo = cursor.execute(command).fetchall()
-
-
-
+            easygui.msgbox(currentInfo, title = "Nutritional Information")
 
 while True:
     # give us image and verify success
