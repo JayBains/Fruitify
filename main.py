@@ -16,6 +16,7 @@ WiHeTa = 320
 confidenceThreshold = 0.7
 nmsThreshold = 0.0005
 
+# drag classes.names file in project folder
 # read text file of class names
 fruitFile = 'classes.names'
 fruitNames = []
@@ -34,13 +35,14 @@ nutrition = False
 with open(fruitFile, 'rt') as f:
     fruitNames = f.read().rstrip('\n').split('\n')
 
-# drag unzipped weights file into the project folder
+# drag config file and unzipped weights file into the project folder
 # can be downloaded from link in 'readme.md' file on git
 modelConfiguration = 'yolov3_fruit.cfg'
 modelWeights = 'yolov3_fruit_final.weights'
 
 # connects to neural network
-# Target CPU, dependancies for GPU leverage don'f work :\
+# Target CPU, dependencies for GPU leverage don't work :\
+# will probably try again later
 net = cv2.dnn.readNet(modelConfiguration, modelWeights)
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
