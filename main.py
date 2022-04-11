@@ -41,7 +41,7 @@ modelConfiguration = 'yolov3_fruit.cfg'
 modelWeights = 'yolov3_fruit_final.weights'
 
 # connects to neural network
-# Target CPU, dependencies for GPU leverage don't work :\
+# Target CPU, dependencies for GPU leverage don't work :( #FutureProject
 net = cv2.dnn.readNet(modelConfiguration, modelWeights)
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
@@ -62,6 +62,8 @@ def findObjects(outputs, img):
 
 # if confidence of identified object is greater than the minimum threshold
 # return name and confidence from neural network
+# w, h, are window dimensions
+# w, y, are object dimensions
     for output in outputs:
         for det in output:
             scores = det[5:]
@@ -91,7 +93,6 @@ def findObjects(outputs, img):
             uiImg = cv2.imread("UI.jpg")
             currentId = classIds[i]
             command = f"SELECT * FROM food WHERE id = '{currentId}'"
-            print(cursor.execute(command).fetchall())
             currentInfo = cursor.execute(command).fetchall()
             name = cv2.putText(uiImg, currentInfo[0][1], (305, 75), font, 0.5, color, 1, cv2.LINE_AA)
             calories = cv2.putText(uiImg, currentInfo[0][14], (390, 128), font, 1, color, 3, cv2.LINE_AA)
@@ -123,7 +124,7 @@ while True:
     layerNames = net.getLayerNames()
     outputNames = [layerNames[i-1] for i in net.getUnconnectedOutLayers()]
 
-    # sends object names to neural network
+    # output name of detected object
     outputs = net.forward(outputNames)
     findObjects(outputs, img)
 
