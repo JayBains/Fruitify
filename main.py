@@ -42,12 +42,13 @@ modelWeights = 'yolov3_fruit_final.weights'
 
 # connects to neural network
 # Target CPU, dependencies for GPU leverage don't work :\
-# will probably try again later
 net = cv2.dnn.readNet(modelConfiguration, modelWeights)
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
 # Renders a window with rectangle outlining detected object
+# creates array for bounding box and class ids
+# declares global variables
 def findObjects(outputs, img):
     He, Wi, Ta = img.shape
     boundingBox = []
@@ -59,6 +60,8 @@ def findObjects(outputs, img):
 
     confidence_values = []
 
+# if confidence of identified object is greater than the minimum threshold
+# return name and confidence from neural network
     for output in outputs:
         for det in output:
             scores = det[5:]
@@ -73,6 +76,7 @@ def findObjects(outputs, img):
     indices = cv2.dnn.NMSBoxes(boundingBox, confidence_values, confidenceThreshold, nmsThreshold)
 
     # creates a bounding box with name and confidence percentage on identified objects
+    # pink
     for i in indices:
         box = boundingBox[i]
         x,y,w,h = box[0], box[1], box[2], box[3]
@@ -80,8 +84,9 @@ def findObjects(outputs, img):
         cv2.putText(img, f'{fruitNames[classIds[i]].upper()} {int(confidence_values[i]*100)}%',
                             (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 255), 2)
 
-        # Displays information stored in 'nutrition' database
+        # pulls and displays information stored in 'nutrition' database
         # Data will only be printed on a change in class id
+        # Information is displayed as text over the connected jpg
         if classIds[i] != currentId:
             uiImg = cv2.imread("UI.jpg")
             currentId = classIds[i]
@@ -124,12 +129,13 @@ while True:
 
     # Shows video feed on screen
     # resizes window
+    # attaches jpg to camera feed window, has to be same resolution
     cv2.namedWindow('Fruitify', cv2.WINDOW_NORMAL)
     cv2.resizeWindow('Fruitify', 1920, 720)
     combinedImg = np.concatenate((img, uiImg), axis=1)
     cv2.imshow('Fruitify', combinedImg)
 
-    # close application at 'q' button press
+    # end application at 'q' button press
     if cv2.waitKey(1) & 0xFF ==ord('q'):
         print("Application closed.")
         break
