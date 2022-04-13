@@ -2,15 +2,17 @@ import cv2
 import numpy as np
 import sqlite3
 
-# connecting to local databse
+# connecting to local database
+# verify connection
 connection = sqlite3.connect("nutrition.db")
 cursor = connection.cursor()
+print(connection)
 
 # Get frames of webcam
 cap = cv2.VideoCapture(0)
 
 # tranform resolution to multiple of 32 to allow Darknet CNN to process
-WiHeTa = 320
+WiHeTa = 416
 
 # setting minimum confidence threshold and aggressiveness of model
 confidenceThreshold = 0.7
@@ -94,6 +96,7 @@ def findObjects(outputs, img):
             currentId = classIds[i]
             command = f"SELECT * FROM food WHERE id = '{currentId}'"
             currentInfo = cursor.execute(command).fetchall()
+            print(currentInfo)
             name = cv2.putText(uiImg, currentInfo[0][1], (305, 75), font, 0.5, color, 1, cv2.LINE_AA)
             calories = cv2.putText(uiImg, currentInfo[0][14], (390, 128), font, 1, color, 3, cv2.LINE_AA)
             totalFat = cv2.putText(uiImg, currentInfo[0][2], (357, 175), font, fontScale, color, thickness, cv2.LINE_AA)
@@ -124,7 +127,8 @@ while True:
     layerNames = net.getLayerNames()
     outputNames = [layerNames[i-1] for i in net.getUnconnectedOutLayers()]
 
-    # output name of detected object
+    # forward pass to neural network
+    # runs find object method with outputs and image as parameters
     outputs = net.forward(outputNames)
     findObjects(outputs, img)
 
@@ -137,6 +141,7 @@ while True:
     cv2.imshow('Fruitify', combinedImg)
 
     # end application at 'q' button press
+    # case sensitive
     if cv2.waitKey(1) & 0xFF ==ord('q'):
         print("Application closed.")
         break
