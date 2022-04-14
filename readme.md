@@ -4,7 +4,7 @@ A fruit and vegetable identifier that displays nutritional information in real t
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Aubergine, Banana, Apple, Corn
+Works with: **Aubergine, Banana, Apple, Corn**
 
 (More items will be added as future project)
 
