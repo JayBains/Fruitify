@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import sqlite3
+import os
 
 # connecting to local database
 # verify connection
@@ -20,7 +21,7 @@ nmsThreshold = 0.0005
 
 # drag classes.names file in project folder
 # read text file of class names
-fruitFile = 'classes.names'
+fruitFile = os.path.realpath('classes.names')
 fruitNames = []
 currentId = -1
 currentInfo = []
@@ -30,7 +31,7 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 fontScale = 0.4
 color = (0, 0, 0)
 thickness = 1
-uiImg = cv2.imread("UI.jpg")
+uiImg = cv2.imread('UI.jpg')
 nutrition = False
 
 # open text file and extract information
