@@ -1,6 +1,12 @@
-WLCOME TO FRUITIFY!!
+**WELCOME TO FRUITIFY!!**
 
-A fruit and vegetable identifier that displays nutritional information in real time
+A fruit and vegetable identifier that displays nutritional information in real time.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Aubergine, Banana, Apple, Corn
+
+(More items will be added as future project)
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
