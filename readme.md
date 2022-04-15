@@ -21,7 +21,7 @@ https://drive.google.com/drive/folders/1OZTeKMS8FEWQe8AgFZnR3Wj43vwqsgEI?usp=sha
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Known Issue:
+Known Issues:
 
 - Do not feel threatened if the app identifies you as an aubergine, you are still human!
 
