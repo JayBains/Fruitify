@@ -25,7 +25,7 @@ Known Issues:
 
 - Do not feel threatened if the app identifies you as an aubergine, you are still human!
 
-- Python project sometimes crashes after openeing. This is due to camera permissions changing when other apps utilise the camera prior to use with Fruitify. I just unplug my camera and plug it back in again to fix.
+- Python project sometimes crashes after openeing. This is due to permissions changing when other apps utilise the camera prior to use with Fruitify. I just unplug my camera and plug it back in again to fix.
 ```
 ⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠛⠛⠋⠉⠈⠉⠉⠉⠉⠛⠻⢿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⡿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⢿⣿⣿⣿⣿
